@@ -4,10 +4,10 @@ const bcrypt = require("bcrypt");
 const User = require("../models/User");
 const News = require("../models/News");
 const Comment = require("../models/Comment");
-// const verifyToken = require("../verifyToken");
+const verifyToken = require("../verifyToken");
 
 // Update user details
-router.put("/:id", async function (req, res) {
+router.put("/:id", verifyToken, async function (req, res) {
     try {
         if (req.body.password) {
             const salt = await bcrypt.genSalt(10);
@@ -28,7 +28,7 @@ router.put("/:id", async function (req, res) {
 // Delete a User
 // by deleting a user all comments and news pulished by that user needs to be deleted as well
 
-router.delete("/:id", async function (req, res) {
+router.delete("/:id", verifyToken, async function (req, res) {
     try {
         await User.findByIdAndDelete(req.params.id);
         await News.deleteMany({ userId: req.params.id });
