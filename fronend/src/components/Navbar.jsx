@@ -1,8 +1,17 @@
 import { Link } from "react-router-dom";
 import { FaSearch } from "react-icons/fa";
+import { FaBars } from "react-icons/fa";
+import Menu from "./Menu";
+import { useState, useContext } from "react";
+import { UserContext } from "../context/UserContext";
 
 const Navbar = () => {
-    const user =false;
+    const [menu, setMenu] = useState(false)
+    const showMenu=() => {
+        setMenu(!menu)}
+
+    const {user} = useContext(UserContext);
+    console.log(user)
     return (
 
         <div className="bg-yellow-600 text-white flex items-center justify-between px-6 md:px-[200px] py-4">
@@ -12,11 +21,20 @@ const Navbar = () => {
                 <input className="border-4 border-grey outline-2 px-3" placeholder="Search here" type="text" />
 
             </div>
-            <div className="flex items-center justify-center space-x-2 md:space-x-4">
-                { user ? <h2><Link to="/Create">Create</Link></h2> : <h3 className="px-4 py-2 text-lg font-bold text-green-300 bg-pink-500 hover:bg-yellow-500 hover:text-white rounded-lg"><Link to="/login">LOGIN</Link></h3> }
-                {user ? <h2>Profile</h2> : <h3 className="px-4 py-2 text-lg font-bold text-green-300 bg-blue-500 hover:bg-yellow-500 hover:text-white rounded-lg"><Link to="/signUp">SIGNUP</Link></h3>}
+            <div className="hidden md:flex items-center justify-center space-x-2 md:space-x-4">
+                {user ? <h3><Link to="/write">Craete News</Link></h3> : <h3 className="px-4 py-2 text-lg font-bold text-green-300 bg-pink-500 hover:bg-yellow-500 hover:text-white rounded-lg"><Link to="/login">LOGIN</Link></h3>}
+                {user ? 
+                <div onClick={showMenu}>
+                    <p className="cursor-pointer relative" ><FaBars /></p>
+                    {menu && <Menu />}
+                </div>
+                 : <h3 className="px-4 py-2 text-lg font-bold text-green-300 bg-blue-500 hover:bg-yellow-500 hover:text-white rounded-lg"><Link to="/signUp">SIGNUP</Link></h3>}
             </div>
-            
+
+            <div onClick={showMenu} className="md:hidden text-lg">
+                <p className="cursor-pointer relative" ><FaBars /></p>
+                {menu && <Menu />}
+            </div>
         </div>
 
     )

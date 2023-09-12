@@ -24,4 +24,4 @@ I started my project with setting up all requirements in Trello and definning us
 ### Trello
 Using **Trello** during any projects can be an excellent way to create a roadmap for the project so I used this powerful project managmnet tool in order to keep my project oragnised and well documented. 
 
-![Trello](../project4-schoolNews/fronend/public/images/Trello.png)
+![Trello](./fronend/public/images/Trello.png)

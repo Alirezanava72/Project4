@@ -2,6 +2,7 @@ const express = require("express");
 const app = express();
 const mongoose = require("mongoose");
 const dotenv = require("dotenv");
+const cors = require("cors");
 // register cookieParser before other routes
 const cookieParser = require("cookie-parser");
 const authRoute =require("./routes/auth");
@@ -26,6 +27,7 @@ const connectDB=async()=>{
 dotenv.config();
 app.use(cookieParser());
 app.use(express.json());
+app.use(cors({origin:"http://localhost:5173", credentials: true})); // credentials:true is for passing on the cookies
 app.use("/api/auth",authRoute);
 app.use("/api/users",userRoute);
 app.use("/api/news",newsRoute);
