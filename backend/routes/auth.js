@@ -43,7 +43,7 @@ router.post("/login", async function (req, res) {
     // Generating JWT for authentication
     const token = jwt.sign(
       { 
-        id: user._id,
+        _id: user._id,
         username:user.username,
         email:user.email
       },

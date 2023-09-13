@@ -59,8 +59,12 @@ router.get("/", async function (req, res) {
     // console.log(query)
     try {
         const searchFilter = {
-            title:{$regex:query.search, $options:"i"}
-        }
+            $or: [
+              { title: { $regex: query.search, $options: "i" } },
+              { description: { $regex: query.search, $options: "i" } }
+            ]
+          };
+          
         const news = await News.find(query.search?searchFilter:null);
         res.status(200).json(news);
     } catch (err) {
