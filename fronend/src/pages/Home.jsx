@@ -13,9 +13,9 @@ const Home = () => {
     const { search } = useLocation();
     const [news, setNews] = useState([]);
     const [noResults, setNoResults] = useState(false);
-    const [loader, setLoader] = useState(false);
     const {user} = useContext(UserContext)
-    console.log(user)
+
+    // console.log(user)
 
     const fetchNews = async () => {
         try {
@@ -48,7 +48,7 @@ const Home = () => {
             <div className="px-8 md:px-[200px] min-h-[80vh]">
                 {!noResults ? news.map((news) => (
 
-                    <Link to = {user ? `/news/news/ ${news._id}` : "/login"}>
+                    <Link to = {user ? `/news/news/${news._id}` : "/login"}>
                         <HomePosts key={news._id} news={news} />
                     </Link>
 
