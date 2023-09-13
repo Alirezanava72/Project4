@@ -1,3 +1,5 @@
+
+
 const HomePosts = ({news}) => {
     return (
       <div className="w-full flex mt-8 space-x-5">
