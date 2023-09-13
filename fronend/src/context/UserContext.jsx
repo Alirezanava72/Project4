@@ -2,10 +2,11 @@ import axios from "axios";
 import { createContext, useEffect, useState } from "react";
 import { URL } from "../url";
 
-
+// to share user-related data across components using createContext function
 export const UserContext = createContext({})
 
-
+// this component takes a children prop that represents 
+// the child components wrapped by this context provider
 export function UserContextProvider({ children }) {
     const [user, setUser] = useState(null)
 

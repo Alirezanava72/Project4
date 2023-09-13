@@ -11,9 +11,8 @@ export default function Menu () {
 
     const handleLogout = async() => {
         try {
-            const res=await axios.get(URL+"/api/auth/logout",{withCredentials:true})
-             // console.log(res)
-            console.log(res);
+            const res = await axios.get( URL+"/api/auth/logout", { withCredentials:true });
+             console.log(res)
             setUser(null)
 
         } catch (err) {
