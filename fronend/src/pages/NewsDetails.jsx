@@ -67,7 +67,7 @@ export default function NewsDetails() {
                 <div className="flex justify-between items-center">
                     <h1 className="text-2xl font-bold text-black md:text-3xl">{news.title}</h1>
                     {/*user?._id === news?.userId && */<div className="flex items-center justify-center space-x-2">
-                        <p className="text-xl cursor-pointer" onClick={()=>navigate(`/news/news/${newsId}/edit`)}><BiEdit news={news} /></p>
+                        <p className="text-xl cursor-pointer" onClick={()=>navigate(`/news/news/${newsId}/edit`)}><BiEdit news={news} newsId={newsId}/></p>
                         <p className="text-xl cursor-pointer" onClick={handleDeleteNews}><MdDelete /></p>
                     </div>}
                 </div>

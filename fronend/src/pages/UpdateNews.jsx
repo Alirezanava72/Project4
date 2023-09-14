@@ -6,9 +6,9 @@ import { URL } from "../url";
 import axios from "axios";
 import { useNavigate, Navigate, useParams } from "react-router-dom";
 
-export default function UpdateNews({ news }) {
+export default function UpdateNews({ news, newsId }) {
 
-    // let { id } = useParams();
+    let { id } = useParams();
     const { user } = useContext(UserContext);
     console.log(news);
     const [newNews, setNewNews] = useState({
@@ -21,6 +21,22 @@ export default function UpdateNews({ news }) {
     const [file, setFile] = useState(null);
     const navigate = useNavigate();
 
+
+    const fetchNews = async() => {
+
+        try {
+            const res = await axios.get(URL + "/api/news/" + id)
+            setNewNews(res.data);
+            console.log(res.data)
+
+        } catch (err) {
+            console.log(err)
+        }
+    }
+
+    useEffect(() => {
+        fetchNews()
+    }, [])
 
     const handleChange = (e) => {
         setNewNews({ ...newNews, [e.target.name]: e.target.value })
@@ -42,7 +58,10 @@ export default function UpdateNews({ news }) {
    
             navigate("/news/news/" + res.data._id);
         });
+        
     }
+
+
 
     return(
         <div>

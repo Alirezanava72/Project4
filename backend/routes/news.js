@@ -22,7 +22,7 @@ router.post("/", async function (req, res) {
 });
 
 // Edit News
-router.put("/:id",  verifyToken, async function (req, res) {
+router.put("/:id", async function (req, res) {
     try {
         const updatedNews = await News.findByIdAndUpdate(
             req.params.id,
