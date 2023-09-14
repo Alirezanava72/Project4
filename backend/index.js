@@ -4,6 +4,7 @@ const mongoose = require("mongoose");
 const dotenv = require("dotenv");
 const cors = require("cors");
 const multer = require("multer");
+const path = require("path");
 // register cookieParser before other routes
 const cookieParser = require("cookie-parser");
 const authRoute =require("./routes/auth");
@@ -13,6 +14,7 @@ const commentRoute = require("./routes/comments");
 const logger = require("morgan");
 
 app.use(logger("dev"));
+
 
 
 // Database connection
@@ -31,6 +33,7 @@ const connectDB=async()=>{
 dotenv.config();
 app.use(cookieParser());
 app.use(express.json());
+app.use("/images", express.static(path.join(__dirname, "/images")));
 app.use(cors({origin:"http://localhost:5173", credentials: true})); // credentials:true is for passing on the cookies
 app.use("/api/auth",authRoute);
 app.use("/api/users",userRoute);
@@ -51,7 +54,7 @@ const storage=multer.diskStorage({
 
 const upload=multer({storage:storage})
 app.post("/api/upload",upload.single("file"),(req,res)=>{
-    // console.log(req.body)
+    console.log(req.body)
     res.status(200).json("Image has been uploaded successfully!")
 })
 

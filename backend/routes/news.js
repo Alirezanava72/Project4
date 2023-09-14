@@ -9,10 +9,10 @@ const verifyToken = require("../verifyToken");
 
 // Add news
 router.post("/", async function (req, res) {
-    console.log(req.body)
+    // console.log(req.body)
     try {
         const newNews = await News.create(req.body);
-        console.log(newNews)
+        // console.log(newNews)
         // const savedNews = await newNews.save();
         res.status(200).json(newNews);
     } catch (err) {
