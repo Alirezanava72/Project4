@@ -52,7 +52,7 @@ const Home = () => {
                         <HomePosts key={news._id} news={news} />
                     </Link>
 
-                )) : <h3 className="flex justify-center items-center mt-16">Nothing found for "{search && search.replace('?search=', '')}" !</h3>}
+                )) : <h3 className="flex justify-center items-center mt-16">Nothing found for "{search && search.replace('?search=', '').replace(/%20/g, ' ')}" !</h3>}
 
             </div>
             <Footer />

@@ -8,9 +8,9 @@ import { useNavigate, Navigate } from "react-router-dom";
 
 export default function CreateNews() {
 
-
+    
     const { user } = useContext(UserContext);
-    console.log(user);
+    // console.log(user);
     const [newNews, setNewNews] = useState({
         title: "",
         description: "",
@@ -28,7 +28,7 @@ export default function CreateNews() {
 
  
     const handleCreate = async (e) => {
-        console.log("hello")
+        // console.log("hello")
         e.preventDefault()
 
         if (file) {
@@ -42,7 +42,8 @@ export default function CreateNews() {
         // photo uploading
             try {
                 const imgUpload = await axios.post(URL + "/api/upload", data)
-                console.log(imgUpload.data)
+                // console.log(imgUpload.data)
+               
             }
             catch (err) {
                 console.log(err)
@@ -51,12 +52,12 @@ export default function CreateNews() {
 
         // News craetion 
 
-        console.log(newNews)
+        // console.log(newNews)
         newNews.userId = user._id
         newNews.username = user.username
         // try {
         await axios.post(URL + "/api/news", newNews).then((res) => {
-            console.log(res.data)
+            // console.log(res.data)
  
             navigate("/news/news/" + res.data._id);
         });
