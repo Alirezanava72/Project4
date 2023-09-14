@@ -45,21 +45,6 @@ export default function NewsDetails() {
     }, [newsId])
 
 
-
- 
-
-    // try {
-    //     await axios.delete(URL + "/api/news/" + newsId, { withCredentials: true });
-    //     console.log("News deleted successfully");
-    //     navigate("/");
-    // } catch (err) {
-    //     console.error("Error deleting news:", err);
-    // }
-
-
-
-
-
     return (
         <div>
             <Navbar />
@@ -79,7 +64,7 @@ export default function NewsDetails() {
                         <p>{new Date(news.updatedAt).toString().slice(16,21)}</p>
                     </div>
                 </div>
-                <img src={`./${news.photo}`} alt="" className="w-full mx-auto mt-8" />
+                <img src={news.photo} alt="" className="w-full mx-auto mt-8" />
                 <br />
                 <p className="mx-auto text-sm md:text-lg">{news.description}</p>
 
