@@ -8,13 +8,15 @@ const verifyToken = require("../verifyToken");
 
 
 // Add news
-router.post("/create", verifyToken, async function (req, res) {
-    // console.log(req.body)
+router.post("/", async function (req, res) {
+    console.log(req.body)
     try {
-        const newNews = new News(req.body);
-        const savedNews = await newNews.save();
-        res.status(200).json(savedNews);
+        const newNews = await News.create(req.body);
+        console.log(newNews)
+        // const savedNews = await newNews.save();
+        res.status(200).json(newNews);
     } catch (err) {
+        console.log(err)
         res.status(500).json(err);
     }
 });

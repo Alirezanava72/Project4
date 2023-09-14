@@ -10,6 +10,9 @@ const authRoute =require("./routes/auth");
 const userRoute = require("./routes/users");
 const newsRoute = require("./routes/news");
 const commentRoute = require("./routes/comments");
+const logger = require("morgan");
+
+app.use(logger("dev"));
 
 
 // Database connection
