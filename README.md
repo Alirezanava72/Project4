@@ -142,8 +142,6 @@ Designing a well-structured RESTful API with appropriate endpoints, managing req
 ## Wins
 I learned how to build both the visible part of a website (called the frontend) and the behind-the-scenes logic that makes it work (known as the backend). This experience helped me become a more skilled full-stack developer, capable of creating complete web applications from start to finish. <br/>
 
-
-
 ## Enhancements and Upcoming Features
 * Enhance the user interface and user experience of the news page
 * Using comments for each news
