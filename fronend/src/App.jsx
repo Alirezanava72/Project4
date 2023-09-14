@@ -17,7 +17,7 @@ const App = () => {
         <Route exact path="/signup" element={<SignUp />} />
         <Route exact path="/write" element={<CreateNews />} />
         <Route exact path="/news/news/:id" element={<NewsDetails />} />
-        <Route exact path="/edit/:id" element={<UpdateNews />} />
+        <Route exact path="/news/news/:id/edit" element={<UpdateNews />} />
 
       </Routes>
     </UserContextProvider>

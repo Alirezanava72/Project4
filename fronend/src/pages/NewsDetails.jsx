@@ -1,10 +1,10 @@
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
-import { RiFileEditLine } from "react-icons/ri"
+import { BiEdit } from "react-icons/bi"
 import { MdDelete } from "react-icons/md"
 import Comments from "../components/comments";
 import { useContext, useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { Navigate, useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
 import { URL } from "../url";
 import { UserContext } from "../context/UserContext";
@@ -14,21 +14,51 @@ export default function NewsDetails() {
     const newsId = useParams().id;
     const [news, setNews] = useState({});
     const {user} = useContext(UserContext);
+    const navigate = useNavigate();
 
     const fetchNews = async() => {
 
         try {
             const res = await axios.get(URL + "/api/news/" + newsId)
             setNews(res.data);
+            console.log(res.data)
 
         } catch (err) {
             console.log(err)
         }
     }
 
+    const handleDeleteNews = async()=>{
+
+        try {
+            const res = await axios.delete(URL+"/api/news/" + newsId)
+            console.log(res.data)
+            navigate("/")
+            
+        } catch (err) {
+            console.log(err)
+        }
+            }
+
     useEffect(() => {
         fetchNews()
     }, [newsId])
+
+
+
+ 
+
+    // try {
+    //     await axios.delete(URL + "/api/news/" + newsId, { withCredentials: true });
+    //     console.log("News deleted successfully");
+    //     navigate("/");
+    // } catch (err) {
+    //     console.error("Error deleting news:", err);
+    // }
+
+
+
+
 
     return (
         <div>
@@ -36,13 +66,12 @@ export default function NewsDetails() {
             <div className="px-8 md:px-[200px] mt-8">
                 <div className="flex justify-between items-center">
                     <h1 className="text-2xl font-bold text-black md:text-3xl">{news.title}</h1>
-                    {user?._id === news?.userId && <div className="flex items-center justify-center space-x-2">
-                        {/* Edit and Delete icons for News details */}
-                        <p className="text-xl"><RiFileEditLine /></p>
-                        <p className="text-xl"><MdDelete /></p>
+                    {/*user?._id === news?.userId && */<div className="flex items-center justify-center space-x-2">
+                        <p className="text-xl cursor-pointer" onClick={()=>navigate(`/news/news/${newsId}/edit`)}><BiEdit news={news} /></p>
+                        <p className="text-xl cursor-pointer" onClick={handleDeleteNews}><MdDelete /></p>
                     </div>}
                 </div>
-                {/*  */}
+                
                 <div className="flex item-center justify-between mt-2 md:mt-4">
                     <p>@{news.username}</p>
                     <div className="flex space-x-2">
@@ -50,7 +79,7 @@ export default function NewsDetails() {
                         <p>{new Date(news.updatedAt).toString().slice(16,21)}</p>
                     </div>
                 </div>
-                <img src={news.photo} alt="" className="w-full mx-auto mt-8" />
+                <img src={`./${news.photo}`} alt="" className="w-full mx-auto mt-8" />
                 <br />
                 <p className="mx-auto text-sm md:text-lg">{news.description}</p>
 

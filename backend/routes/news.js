@@ -36,10 +36,11 @@ router.put("/:id",  verifyToken, async function (req, res) {
 });
 
 // Delete News
-router.delete("/:id", verifyToken, async function (req, res) {
+router.delete("/:id", async function (req, res) {
     try {
         await News.findByIdAndDelete(req.params.id);
-        //   await Comment.deleteMany({ newsId: req.params.id });
+        // deleting comments with the news
+        await Comment.deleteMany({ newsId: req.params.id });
         res.status(200).json("News has been deleted!");
     } catch (err) {
         res.status(500).json(err);

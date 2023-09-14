@@ -8,14 +8,13 @@ import { useNavigate, Navigate } from "react-router-dom";
 
 export default function CreateNews() {
 
-    // const [title, setTitle] = useState("");
-    // const [description, setDescription] = useState("");
+
     const { user } = useContext(UserContext);
     console.log(user);
     const [newNews, setNewNews] = useState({
-        title:"",
-        description:"",
-      
+        title: "",
+        description: "",
+
 
 
     });
@@ -24,41 +23,31 @@ export default function CreateNews() {
 
 
     const handleChange = (e) => {
-        setNewNews({...newNews, [e.target.name]: e.target.value })
+        setNewNews({ ...newNews, [e.target.name]: e.target.value })
     }
 
-    // useEffect(() => {
-    //     axios.get(URL + `/api/news`).then((res)=>{
-    //         console.log(res)
-    //         setNewNews(res.data)
-    //     })
-    // },[]);
-    const handleCreate =  async (e) => {
+ 
+    const handleCreate = async (e) => {
         console.log("hello")
         e.preventDefault()
-        // const news = {
-        //     title,
-        //     description,
-        //     username: user.username,
-        //     userId: user._id
-        // }
-        // if (file) {
-        //     const data = new FormData()
-        //     const filename = Date.now() + file.name 
-        //     data.append("img", filename)
-        //     data.append("file", file)
-        //     news.photo = filename
+
+        if (file) {
+            const data = new FormData()
+            const filename = Date.now() + file.name 
+            data.append("img", filename)
+            data.append("file", file)
+            newNews.photo = filename
 
 
-        //     // photo uploading
-        //     try {
-        //         const imgUpload = await axios.post(URL + "/api/upload", data)
-        //         console.log(imgUpload.data)
-        //     }
-        //     catch (err) {
-        //         console.log(err)
-        //     }
-        // }
+        // photo uploading
+            try {
+                const imgUpload = await axios.post(URL + "/api/upload", data)
+                console.log(imgUpload.data)
+            }
+            catch (err) {
+                console.log(err)
+            }
+        }
 
         // News craetion 
 
@@ -66,22 +55,12 @@ export default function CreateNews() {
         newNews.userId = user._id
         newNews.username = user.username
         // try {
-            await axios.post(URL + "/api/news", newNews ).then((res) => {
-                console.log(res.data)
-                // setNewNews({ 
-                //     title:"",
-                //     description:""
-            
-                // }).then((res)=>{
-                //     setNewNews(res.data)
-                // });
-                navigate("/news/news/" + res.data._id);
+        await axios.post(URL + "/api/news", newNews).then((res) => {
+            console.log(res.data)
+ 
+            navigate("/news/news/" + res.data._id);
         });
 
-        // }
-        // catch (err) {
-        //     console.log(err)
-        // }
 
 
     }
@@ -103,74 +82,6 @@ export default function CreateNews() {
         </div>
     )
 
-    // const handleCreate = async (e) => {
-    //     console.log("hi")
-    //     e.preventDefault();
-
-    //     const news = {
-    //         title,
-    //         description,
-    //         username: user.username,
-    //         userId: user._id,
-    //     };
-
-    //     try {
-
-    //         if (file) {
-    //             const data = new FormData();
-    //             console.log(data)
-    //             const filename = `${Date.now()}-${file.name}`;
-    //             console.log(filename)
-    //             data.append("name", filename);
-    //             data.append("file", file);
-    //             news.photo = filename;
-
-    //             await axios.post(URL + "/api/upload", data);
-    //         }
-
-    //         const res = await axios.post(URL + "/api/news/create", news, {
-    //             withCredentials: true,
-
-    //         });
-    //         console.log(res)
-    //         navigate(`/news/news/${res.data._id}`);
-    //     } catch (err) {
-    //         console.error(err);
-    //     }
-    // };
-
-    // return (
-    //     <div>
-    //         <Navbar />
-    //         <div className="px-6 md:px-[200px] mt-8">
-    //             <h1 className="font-bold md:text-2xl text-xl">Create News</h1>
-    //             <form onSubmit={handleCreate} className="w-full flex flex-col space-y-4 md:space-y-8 mt-4">
-    //                 <input
-    //                     onChange={(e) => setTitle(e.target.value)}
-    //                     type="text"
-    //                     placeholder="Enter News Title"
-    //                     className="px-4 py-2 outline-none"
-    //                 />
-    //                 <input
-    //                     onChange={(e) => setFile(e.target.files[0])}
-    //                     type="file"
-    //                     className="px-4"
-    //                 />
-    //                 <textarea
-    //                     onChange={(e) => setDescription(e.target.value)}
-    //                     rows={15}
-    //                     cols={30}
-    //                     className="px-4 py-2 outline-none"
-    //                     placeholder="Type News details"
-    //                 />
-    //                 <button type="submit" className="bg-black w-full md:w-[20%] mx-auto text-white font-semibold px-4 py-2 md:text-xl text-lg">
-    //                     Create
-    //                 </button>
-    //             </form>
-    //         </div>
-    //         <Footer />
-    //     </div>
-    // );
 
 };
 
