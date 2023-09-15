@@ -70,37 +70,25 @@ const NewsSchema = new mongoose.Schema({
 
 Defines the structure of user accounts. It includes fields like username, email, and a hashed password. This model is used to manage user data and authentication.:
 ```javaScript
-const NewsSchema = new mongoose.Schema({
-
-    title: {
-        type: String,
-        required: true,
-        unique: true
-    },
-
-    description: {
-        type: String,
-        required: true,
-        unique: true
-    },
-
-    photo: {
-        type: String,
-        required: false,
-
-    },
-
+const UserSchema = new mongoose.Schema({
     username: {
         type: String,
         required: true,
+        unique: true,
     },
-
-    userId: {
+    email: {
         type: String,
         required: true,
+        unique: true
+    },
+    password: {
+        type: String,
+        required: true
     }
+},
+    { timestamps: true }
 
-}
+);
 ```
 
 ### Routes
